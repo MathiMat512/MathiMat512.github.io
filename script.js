@@ -66,6 +66,14 @@ const sectionObserver = new IntersectionObserver((entries) => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
 
+      // Set sequential animation delays for all skills across containers
+      if (entry.target.id === 'skillss') {
+        const allSkills = entry.target.querySelectorAll('.skill');
+        allSkills.forEach((skill, index) => {
+          skill.style.animationDelay = `${index * 0.08}s`;
+        });
+      }
+
       // Animate children with .animate-item class
       const animItems = entry.target.querySelectorAll('.animate-item');
       animItems.forEach((item, index) => {

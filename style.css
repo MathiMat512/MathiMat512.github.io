@@ -601,64 +601,9 @@ footer {
   }
 }
 
+/* Animation delays are set via JavaScript for correct sequential order */
 #skillss.visible .skill {
   animation: bounceIn 0.6s ease forwards;
-}
-
-#skillss.visible .skills-container:nth-child(2) .skill:nth-child(1) {
-  animation-delay: 0.05s;
-}
-
-#skillss.visible .skills-container:nth-child(2) .skill:nth-child(2) {
-  animation-delay: 0.1s;
-}
-
-#skillss.visible .skills-container:nth-child(2) .skill:nth-child(3) {
-  animation-delay: 0.15s;
-}
-
-#skillss.visible .skills-container:nth-child(2) .skill:nth-child(4) {
-  animation-delay: 0.2s;
-}
-
-#skillss.visible .skills-container:nth-child(2) .skill:nth-child(5) {
-  animation-delay: 0.25s;
-}
-
-#skillss.visible .skills-container:nth-child(2) .skill:nth-child(6) {
-  animation-delay: 0.3s;
-}
-
-#skillss.visible .skills-container:nth-child(2) .skill:nth-child(7) {
-  animation-delay: 0.35s;
-}
-
-#skillss.visible .skills-container:nth-child(4) .skill:nth-child(1) {
-  animation-delay: 0.4s;
-}
-
-#skillss.visible .skills-container:nth-child(4) .skill:nth-child(2) {
-  animation-delay: 0.45s;
-}
-
-#skillss.visible .skills-container:nth-child(4) .skill:nth-child(3) {
-  animation-delay: 0.5s;
-}
-
-#skillss.visible .skills-container:nth-child(4) .skill:nth-child(4) {
-  animation-delay: 0.55s;
-}
-
-#skillss.visible .skills-container:nth-child(6) .skill:nth-child(1) {
-  animation-delay: 0.6s;
-}
-
-#skillss.visible .skills-container:nth-child(6) .skill:nth-child(2) {
-  animation-delay: 0.65s;
-}
-
-#skillss.visible .skills-container:nth-child(6) .skill:nth-child(3) {
-  animation-delay: 0.7s;
 }
 
 /* ========================================
