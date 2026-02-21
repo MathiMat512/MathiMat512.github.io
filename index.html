@@ -16,20 +16,28 @@
 
 <body>
   <header>
-    <nav>
+    <button class="hamburger" id="hamburger-btn" aria-label="Menú">&#9776;</button>
+    <nav id="main-nav">
       <a href="#inicio">Inicio</a>
       <a href="#sobre-mi">Sobre mí</a>
       <a href="#proyectos">Mis proyectos</a>
-      <a href="#skills">Skills</a>
+      <a href="#skillss">Skills</a>
       <a href="#contacto">Contacto</a>
     </nav>
   </header>
 
   <section id="inicio">
-    <div class="section-container">
-      <h1>¡Bienvenido a mi Portafolio web!</h1>
-      <h1>Mathias Daniel Bautista Onofre</h1>
-      <p>Desarrollador Full Stack</p>
+    <div class="section-container-inicio">
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <h1>¡Bienvenido a mi Portafolio web!</h1>
+        <h1>Mathias Bautista Onofre</h1>
+        <p>Desarrollador Junior Full Stack</p>
+        <div class="buttons">
+          <a href="https://www.canva.com/design/DAGUULplWgY/k-cKsgbSAJDtHci1aSdsWw/view?utm_content=DAGUULplWgY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h2653e5addf"
+            class="button-cv" target="_blank">Descargar CV</a>
+        </div>
+      </div>
+      <img src="images/perfil.jpg" class="img-perfil" alt="">
     </div>
   </section>
 
@@ -83,35 +91,37 @@
 
       <!-- PROYECTO 1 -->
       <div class="container">
-        <div class="carousel-section">
-          <div class="carousel-images">
-            <img src="images/lan1.png" alt="Imagen 1" />
-            <img src="images/lan2.png" alt="Imagen 2" />
-            <img src="images/lan3.png" alt="Imagen 3" />
-          </div>
-          <div class="carousel-controls">
-            <button id="prev">‹</button>
-            <button id="next">›</button>
-          </div>
-        </div>
-        <div class="content-section">
-          <h1>Aplicación web para relizar búsquedas de una base de datos empresarial (2025)</h1>
-          <p>
-            Aplicación web empresarial para realizar búsquedas de una base de datos empresarial.
-            Permite realizar búsquedas de proveedores, clientes, facturas, cuentas por cobrar y cuentas por pagar.
-            Calcula las cuentas por cobrar y pagar de los clientes y proveedores, respectivamente con datos históricos
-            de la empresa.
-            Cuenta con un login usando JWT. Es responsiva y tiene un diseño moderno.
-          </p>
-          <div class="div-iconos-link">
-            <div class="tech-icons">
-              <img src="images/react.png" alt="React" />
-              <img src="images/javascript.png" alt="JavaScript" style="border-radius: 5px" />
-              <img src="images/nodejs.png" alt="NodeJS" />
-              <img src="images/mongo.png" alt="MongoDB" />
+        <div class="contenedor-proyectos">
+          <div class="carousel-section">
+            <div class="carousel-images">
+              <img src="images/lan1.png" alt="Imagen 1" />
+              <img src="images/lan2.png" alt="Imagen 2" />
+              <img src="images/lan3.png" alt="Imagen 3" />
             </div>
-            <div class="button-link">
-              <a href="https://github.com/MathiMat512/Club_Polaris" class="repo-button" target="_blank">Link</a>
+            <div class="carousel-controls">
+              <button id="prev">‹</button>
+              <button id="next">›</button>
+            </div>
+          </div>
+          <div class="content-section">
+            <h1>Aplicación web para relizar búsquedas de una base de datos empresarial (2025)</h1>
+            <p>
+              Aplicación web empresarial para realizar búsquedas de una base de datos empresarial.
+              Permite realizar búsquedas de proveedores, clientes, facturas, cuentas por cobrar y cuentas por pagar.
+              Calcula las cuentas por cobrar y pagar de los clientes y proveedores, respectivamente con datos históricos
+              de la empresa.
+              Cuenta con un login usando JWT. Es responsiva y tiene un diseño moderno.
+            </p>
+            <div class="div-iconos-link">
+              <div class="tech-icons">
+                <img src="images/react.png" alt="React" />
+                <img src="images/javascript.png" alt="JavaScript" style="border-radius: 5px" />
+                <img src="images/nodejs.png" alt="NodeJS" />
+                <img src="images/mongo.png" alt="MongoDB" />
+              </div>
+              <div class="button-link">
+                <a href="https://github.com/MathiMat512/Club_Polaris" class="repo-button" target="_blank">Link</a>
+              </div>
             </div>
           </div>
         </div>
@@ -121,41 +131,43 @@
 
       <!-- PROYECTO 2 -->
       <div class="container">
-        <div class="carousel-section">
-          <div class="carousel-images">
-            <img src="images/inven1.png" alt="Imagen 1" />
-            <img src="images/inven2.png" alt="Imagen 2" />
-            <img src="images/inven3.png" alt="Imagen 2" />
-            <img src="images/inven4.png" alt="Imagen 2" />
-            <img src="images/inven5.png" alt="Imagen 2" />
-          </div>
-          <div class="carousel-controls">
-            <button id="prev1">‹</button>
-            <button id="next1">›</button>
-          </div>
-        </div>
-        <div class="content-section">
-          <h1>Inventario para gestionar y transaccionar productos (2025)</h1>
-          <p>
-            Aplicación web - Inventario para gestionar productos. Realiza
-            operaciones CRUD para los siguientes atributos: Productos,
-            Categorias, Proveedores, Marcas, Áreas y Usuarios. Cuenta con un
-            campo de Actividades para visualizar los últimos cambios hechos en
-            los productos, cuenta con una tabla de transacciones para
-            visualizar el historial de vida de los productos y cómo ha ido
-            evolucionando su cantidad de stock
-          </p>
-          <div class="div-iconos-link">
-            <div class="tech-icons">
-              <img src="images/java.png" alt="Java" />
-              <img src="images/mysql.png" alt="MySQL" />
-              <img src="images/tomcat.png" alt="tomcat" />
-              <img src="images/Bootstrap_logo.svg.png" alt="Bootstrap" />
-              <img src="images/javascript.png" alt="JavaScript" style="border-radius: 5px" />
+        <div class="contenedor-proyectos">
+          <div class="carousel-section">
+            <div class="carousel-images">
+              <img src="images/inven1.png" alt="Imagen 1" />
+              <img src="images/inven2.png" alt="Imagen 2" />
+              <img src="images/inven3.png" alt="Imagen 2" />
+              <img src="images/inven4.png" alt="Imagen 2" />
+              <img src="images/inven5.png" alt="Imagen 2" />
             </div>
-            <div class="button-link">
-              <a href="https://www.youtube.com/watch?v=9Un-U8q6yE0&list=LL&index=5" class="repo-button"
-                target="_blank">Link</a>
+            <div class="carousel-controls">
+              <button id="prev1">‹</button>
+              <button id="next1">›</button>
+            </div>
+          </div>
+          <div class="content-section">
+            <h1>Inventario para gestionar y transaccionar productos (2025)</h1>
+            <p>
+              Aplicación web - Inventario para gestionar productos. Realiza
+              operaciones CRUD para los siguientes atributos: Productos,
+              Categorias, Proveedores, Marcas, Áreas y Usuarios. Cuenta con un
+              campo de Actividades para visualizar los últimos cambios hechos en
+              los productos, cuenta con una tabla de transacciones para
+              visualizar el historial de vida de los productos y cómo ha ido
+              evolucionando su cantidad de stock
+            </p>
+            <div class="div-iconos-link">
+              <div class="tech-icons">
+                <img src="images/java.png" alt="Java" />
+                <img src="images/mysql.png" alt="MySQL" />
+                <img src="images/tomcat.png" alt="tomcat" />
+                <img src="images/Bootstrap_logo.svg.png" alt="Bootstrap" />
+                <img src="images/javascript.png" alt="JavaScript" style="border-radius: 5px" />
+              </div>
+              <div class="button-link">
+                <a href="https://www.youtube.com/watch?v=9Un-U8q6yE0&list=LL&index=5" class="repo-button"
+                  target="_blank">Link</a>
+              </div>
             </div>
           </div>
         </div>
@@ -165,37 +177,39 @@
 
       <!-- PROYECTO 3 -->
       <div class="container">
-        <div class="carousel-section">
-          <div class="carousel-images">
-            <img src="images/silenven1.png" alt="Imagen 1" />
-            <img src="images/silenven2.png" alt="Imagen 2" />
-            <img src="images/silenven3.png" alt="Imagen 2" />
-            <img src="images/silenven4.png" alt="Imagen 2" />
-            <img src="images/silenven5.png" alt="Imagen 2" />
-          </div>
-          <div class="carousel-controls">
-            <button id="prev2">‹</button>
-            <button id="next2">›</button>
-          </div>
-        </div>
-        <div class="content-section">
-          <h1>Página web Comercial - SilenvenPVC (2026)</h1>
-          <p>
-            Página web comercial estática para una empresa de venta e instalación
-            de ventanas, puertas y mamparas de PVC. Cuenta con un diseño
-            responsivo y moderno, incluye secciones de productos, contactos,
-            galeria de imágenes y nosotros. Está desarrollado con Bootstrap,
-            React y Astro para optimizar el rendimiento y el SEO de la página.
-          </p>
-          <div class="div-iconos-link">
-            <div class="tech-icons">
-              <img src="images/Bootstrap_logo.svg.png" alt="Bootstrap" />
-              <img src="images/react.png" alt="React" />
-              <img src="images/astro.png" alt="Astro" />
-              <img src="images/javascript.png" alt="JavaScript" style="border-radius: 5px" />
+        <div class="contenedor-proyectos">
+          <div class="carousel-section">
+            <div class="carousel-images">
+              <img src="images/silenven1.png" alt="Imagen 1" />
+              <img src="images/silenven2.png" alt="Imagen 2" />
+              <img src="images/silenven3.png" alt="Imagen 2" />
+              <img src="images/silenven4.png" alt="Imagen 2" />
+              <img src="images/silenven5.png" alt="Imagen 2" />
             </div>
-            <div class="button-link">
-              <a href="https://www.silenvenpvc.com" class="repo-button" target="_blank">Link</a>
+            <div class="carousel-controls">
+              <button id="prev2">‹</button>
+              <button id="next2">›</button>
+            </div>
+          </div>
+          <div class="content-section">
+            <h1>Página web Comercial - SilenvenPVC (2026)</h1>
+            <p>
+              Página web comercial estática para una empresa de venta e instalación
+              de ventanas, puertas y mamparas de PVC. Cuenta con un diseño
+              responsivo y moderno, incluye secciones de productos, contactos,
+              galeria de imágenes y nosotros. Está desarrollado con Bootstrap,
+              React y Astro para optimizar el rendimiento y el SEO de la página.
+            </p>
+            <div class="div-iconos-link">
+              <div class="tech-icons">
+                <img src="images/Bootstrap_logo.svg.png" alt="Bootstrap" />
+                <img src="images/react.png" alt="React" />
+                <img src="images/astro.png" alt="Astro" />
+                <img src="images/javascript.png" alt="JavaScript" style="border-radius: 5px" />
+              </div>
+              <div class="button-link">
+                <a href="https://www.silenvenpvc.com" class="repo-button" target="_blank">Link</a>
+              </div>
             </div>
           </div>
         </div>

@@ -1,161 +1,287 @@
+/* ========================================
+   GLOBAL & RESET
+   ======================================== */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    color: #fff;
-    background-color: #001f3f;
-  }
-  
-  header {
-    background-color: #001030;
-    padding: 20px;
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-  }
-  
-  nav {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  nav a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-    transition: color 0.3s ease;
-    font-family: "Maven Pro", serif;
-  }
-  
-  nav a:hover {
-    color: #1e90ff;
-  }
-  
-  section {
-    padding: 80px 40px 40px;
-    min-height: 10vh !important;
-  }
-  
-  .section-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    text-align: center;
-    font-family: "Maven Pro", serif;
-  }
-
-  .section-container2 {
-    max-width: 1000px;
-    margin: 0 auto;
-    text-align: center;
-    font-family: "Maven Pro", serif;
-    display: flex;
-  }
-  
-  #inicio {
-    position: relative; /* Necesario para la imagen de fondo */
-    background-image: url('images/fondo1.jpg'); /* Añadimos la imagen de fondo */
-    background-size: cover; /* La imagen cubre toda la sección */
-    background-position: center; /* Centra la imagen */
-    background-attachment: fixed; /* Hace que la imagen de fondo se quede fija al hacer scroll */
-    height: 100vh; /* Ocupa toda la altura de la ventana */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center; /* Asegura que el texto se centre */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  background-color: #001f3f;
+  overflow-x: hidden;
 }
 
-#inicio::before {
-    content: ''; /* Crea un pseudo-elemento para la capa oscura */
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Oscurece la imagen de fondo */
-    z-index: 0; /* Pone la capa oscura detrás del contenido */
+/* ========================================
+   HEADER & NAVIGATION
+   ======================================== */
+header {
+  background-color: #001030;
+  padding: 15px 20px;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#inicio .section-container {
-    z-index: 1; /* Asegura que el texto esté sobre la imagen */
-    color: #fff; /* Asegura que el texto sea blanco y legible */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  transition: all 0.3s ease;
 }
 
-#inicio h1 {
-    font-size: 3em;
-    margin: 0;
-    padding: 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Añade sombra al texto para mejorar la legibilidad */
+nav a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  font-family: "Maven Pro", serif;
+  font-size: 1rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+  position: relative;
 }
 
-#inicio p {
-    font-size: 1.5em;
-    margin-top: 10px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Añade sombra al texto para mejorar la legibilidad */
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #1e90ff;
+  transition: width 0.3s ease;
 }
 
-  
-  .Caja1 {
-    background-color: white; /* Fondo blanco */
-    color: #333; /* Color de texto oscuro para buen contraste */
-    padding: 20px; /* Espaciado interno para que el texto no quede pegado al borde */
-    border-radius: 8px; /* Bordes redondeados para un diseño más suave */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para darle profundidad */
-    max-width: 800px; /* Máximo ancho para evitar que se estire demasiado */
-    margin: 0 auto; /* Centra la caja en la pantalla */
-    text-align: left;
+nav a:hover {
+  color: #1e90ff;
+  transform: translateY(-2px);
 }
 
-h2 {
-    font-family: "Maven Pro", serif;
+nav a:hover::after {
+  width: 100%;
 }
 
-p {
-    font-family: "Lexend", serif;
+/* Hamburger Button */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 5px 10px;
+  z-index: 1001;
+  transition: transform 0.3s ease;
 }
 
-.div-iconos-link{
+.hamburger:hover {
+  transform: scale(1.1);
+}
+
+/* ========================================
+   SECTIONS — General
+   ======================================== */
+section {
+  padding: 100px 40px 60px;
+  min-height: 10vh;
+  /* Animation defaults — hidden until scroll-triggered */
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: "Maven Pro", serif;
+}
+
+.section-container-inicio {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: "Maven Pro", serif;
+  z-index: 1;
+  color: #fff;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
+  gap: 30px;
 }
 
-#skills {
-  padding: 80px 20px 20px;
-  min-height: 100vh;
-  background-color: #f4f4f4;
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+h2 {
+  font-family: "Maven Pro", serif;
 }
 
-.skills-container {
+p {
+  font-family: "Lexend", serif;
+  line-height: 1.6;
+}
+
+/* ========================================
+   SECTION: INICIO (Hero)
+   ======================================== */
+#inicio {
+  position: relative;
+  background-image: url('images/fondo1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 100vh;
   display: flex;
   justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap; /* Esto permite que los elementos se acomoden cuando no hay suficiente espacio */
-  margin-top: 30px;
+  align-items: center;
+  text-align: center;
+  /* Custom animation for hero */
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
-.skill {
+#inicio.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+#inicio::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 16, 48, 0.7), rgba(0, 31, 63, 0.5));
+  z-index: 0;
+}
+
+#inicio h1 {
+  font-size: 3em;
+  margin: 0;
+  padding: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#inicio p {
+  font-size: 1.5em;
+  margin-top: 10px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.img-perfil {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.img-perfil:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 30px rgba(30, 144, 255, 0.4);
+}
+
+.button-cv {
+  text-decoration: none;
+  padding: 12px 28px;
+  font-family: "Maven Pro", serif !important;
+  font-size: 18px !important;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  background: linear-gradient(135deg, #1e90ff, #0066cc);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: inline-block;
+}
+
+.button-cv:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(30, 144, 255, 0.4);
+}
+
+/* ========================================
+   SECTION: SOBRE MÍ
+   ======================================== */
+#sobre-mi {
+  background-color: #002b5c;
+  /* Slide from left */
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#sobre-mi.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.Caja1 {
+  background-color: white;
+  color: #333;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.Caja1:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* ========================================
+   SECTION: PROYECTOS
+   ======================================== */
+#proyectos {
+  background-color: #004080;
+  /* Slide from right */
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#proyectos.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.contenedor-proyectos {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100px; /* Puedes ajustar el tamaño de cada div */
-  text-align: center;
+  border-radius: 20px;
+  background-color: #5a5a5a;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.skill-icon {
-  width: 80px; /* Ajusta el tamaño del icono */
-  height: 80px; /* Mantiene la proporción del icono */
-  margin-bottom: 10px;
-}
-
-.skill {
-  font-size: 1em;
-  margin: 0;
-  color: #ffffff; /* Color para el texto */
-  font-family: "Maven Pro", serif;
+.contenedor-proyectos:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
 }
 
 .container {
@@ -181,87 +307,69 @@ p {
 
 .content-section {
   flex: 1;
-  max-width: 600px;
+  max-width: 800px !important;
+  padding: 20px;
 }
 
 .content-section h1 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: #001030;
-  margin-bottom: 10px;
 }
 
 .content-section p {
   font-size: 1rem;
-  margin-bottom: 20px;
   color: #ffffff;
+}
+
+.div-iconos-link {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .tech-icons {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .tech-icons img {
   width: 40px;
   height: 40px;
+  transition: transform 0.3s ease;
+}
+
+.tech-icons img:hover {
+  transform: scale(1.2) rotate(5deg);
 }
 
 .button-link {
   display: flex;
-  margin-left: 40px;
+  margin-bottom: 20px;
 }
 
-.button-link a{
+.button-link a {
   text-decoration: none;
   padding: 10px 20px;
   font-size: 1rem;
   border-radius: 5px;
   color: white;
   text-align: center;
-  height: 20px;
+  height: auto;
 }
 
-.buttons {
-  display: flex;
-  gap: 10px;
-}
-
-.buttons a {
-  text-decoration: none;
-  padding: 10px 20px;
-  font-size: 1rem;
-  border-radius: 5px;
-  color: white;
-  text-align: center;
-}
-
-.repo-button {
-  background-color: #333;
-}
-
-.page-button {
-  background-color: #0077b6;
-}
-
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .image-section,
-  .content-section {
-    max-width: 100%;
-  }
-}
-
+/* Carousel */
 .carousel-section {
   flex: 1;
   max-width: 800px !important;
   position: relative;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 10px 10px 0 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -282,6 +390,8 @@ p {
   display: flex;
   justify-content: space-between;
   transform: translateY(-50%);
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 
 .carousel-controls button {
@@ -291,170 +401,45 @@ p {
   padding: 10px 15px;
   cursor: pointer;
   border-radius: 50%;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .carousel-controls button:hover {
   background-color: rgba(0, 0, 0, 0.8);
+  transform: scale(1.15);
 }
 
-
-
-
-
-  #sobre-mi {
-    background-color: #002b5c;
-  }
-  
-  #proyectos {
-    background-color: #004080;
-  }
-  
-  #skills {
-    background-color: #003f5c;
-  }
-  
-  #contacto {
-    background-color: #002147;
-  }
-  
-  footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #001030;
-    color: #fff;
-    position: relative;
-  }
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    color: #fff;
-    background-color: #001f3f;
-  }
-  
-  header {
-    background-color: #001030;
-    padding: 20px;
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-  }
-  
-  nav {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  nav a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-    transition: color 0.3s ease;
-    font-family: "Maven Pro", serif;
-  }
-  
-  nav a:hover {
-    color: #1e90ff;
-  }
-  
-  section {
-    padding: 80px 20px 20px;
-    min-height: 100vh;
-  }
-  
-  .section-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    text-align: center;
-    font-family: "Maven Pro", serif;
-  }
-
-  .section-container2 {
-    max-width: 1000px;
-    margin: 0 auto;
-    text-align: center;
-    font-family: "Maven Pro", serif;
-    display: flex;
-  }
-  
-  #inicio {
-    position: relative; /* Necesario para la imagen de fondo */
-    background-image: url('images/fondo1.jpg'); /* Añadimos la imagen de fondo */
-    background-size: cover; /* La imagen cubre toda la sección */
-    background-position: center; /* Centra la imagen */
-    background-attachment: fixed; /* Hace que la imagen de fondo se quede fija al hacer scroll */
-    height: 100vh; /* Ocupa toda la altura de la ventana */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center; /* Asegura que el texto se centre */
+#proyectos hr {
+  border: none;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 10px 0;
 }
 
-#inicio::before {
-    content: ''; /* Crea un pseudo-elemento para la capa oscura */
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Oscurece la imagen de fondo */
-    z-index: 0; /* Pone la capa oscura detrás del contenido */
+/* ========================================
+   SECTION: SKILLS
+   ======================================== */
+#skillss {
+  background-color: #003f5c;
+  padding: 100px 20px 60px;
+  /* Fade in + slight bounce */
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-#inicio .section-container {
-    z-index: 1; /* Asegura que el texto esté sobre la imagen */
-    color: #fff; /* Asegura que el texto sea blanco y legible */
-}
-
-#inicio h1 {
-    font-size: 3em;
-    margin: 0;
-    padding: 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Añade sombra al texto para mejorar la legibilidad */
-}
-
-#inicio p {
-    font-size: 1.5em;
-    margin-top: 10px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Añade sombra al texto para mejorar la legibilidad */
-}
-
-  
-  .Caja1 {
-    background-color: white; /* Fondo blanco */
-    color: #333; /* Color de texto oscuro para buen contraste */
-    padding: 20px; /* Espaciado interno para que el texto no quede pegado al borde */
-    border-radius: 8px; /* Bordes redondeados para un diseño más suave */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para darle profundidad */
-    max-width: 800px; /* Máximo ancho para evitar que se estire demasiado */
-    margin: 0 auto; /* Centra la caja en la pantalla */
-    text-align: left;
-}
-
-h2 {
-    font-family: "Maven Pro", serif;
-}
-
-p {
-    font-family: "Lexend", serif;
-}
-
-
-#skills {
-  padding: 80px 20px 20px;
-  min-height: 100vh;
-  background-color: #f4f4f4;
+#skillss.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .skills-container {
   display: flex;
   justify-content: center;
   gap: 20px;
-  flex-wrap: wrap; /* Esto permite que los elementos se acomoden cuando no hay suficiente espacio */
+  flex-wrap: wrap;
   margin-top: 30px;
 }
 
@@ -463,74 +448,55 @@ p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100px; /* Puedes ajustar el tamaño de cada div */
+  width: 100px;
   text-align: center;
+  font-size: 1em;
+  margin: 0;
+  color: #ffffff;
+  font-family: "Maven Pro", serif;
+  transition: transform 0.3s ease;
+}
+
+.skill:hover {
+  transform: translateY(-8px);
 }
 
 .skill-icon {
-  width: 80px; /* Ajusta el tamaño del icono */
-  height: 80px; /* Mantiene la proporción del icono */
+  width: 80px;
+  height: 80px;
   margin-bottom: 10px;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.skill {
-  font-size: 1em;
-  margin: 0;
-  color: #ffffff; /* Color para el texto */
-  font-family: "Maven Pro", serif;
+.skill:hover .skill-icon {
+  transform: scale(1.15) rotate(-5deg);
 }
 
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  gap: 20px;
+/* ========================================
+   SECTION: CONTACTO
+   ======================================== */
+#contacto {
+  background-color: #002147;
+  /* Slide from below */
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.image-section {
-  flex: 1;
-  max-width: 600px;
+#contacto.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.image-section img {
-  width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.content-section {
-  flex: 1;
-  max-width: 600px;
-}
-
-.content-section h1 {
-  font-size: 2rem;
-  color: #001030;
-  margin-bottom: 10px;
-}
-
-.content-section p {
-  font-size: 1rem;
-  margin-bottom: 20px;
-  color: #ffffff;
-}
-
-.tech-icons {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.tech-icons img {
-  width: 40px;
-  height: 40px;
-}
-
+/* ========================================
+   BUTTONS
+   ======================================== */
 .buttons {
   display: flex;
   gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .buttons a {
@@ -544,13 +510,255 @@ p {
 
 .repo-button {
   background-color: #333;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.repo-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  background-color: #444;
 }
 
 .page-button {
   background-color: #0077b6;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.page-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 119, 182, 0.4);
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+footer {
+  text-align: center;
+  padding: 25px;
+  background-color: #001030;
+  color: #fff;
+  position: relative;
+  font-family: "Maven Pro", serif;
+}
+
+/* ========================================
+   STAGGERED ANIMATIONS for children
+   ======================================== */
+.animate-item {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-item.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays */
+.animate-item:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.animate-item:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.animate-item:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
+.animate-item:nth-child(4) {
+  transition-delay: 0.4s;
+}
+
+.animate-item:nth-child(5) {
+  transition-delay: 0.5s;
+}
+
+.animate-item:nth-child(6) {
+  transition-delay: 0.6s;
+}
+
+.animate-item:nth-child(7) {
+  transition-delay: 0.7s;
+}
+
+/* Skill items bounce-in animation */
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(30px);
+  }
+
+  50% {
+    transform: scale(1.05) translateY(-5px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+#skillss.visible .skill {
+  animation: bounceIn 0.6s ease forwards;
+}
+
+#skillss.visible .skills-container:nth-child(2) .skill:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+#skillss.visible .skills-container:nth-child(2) .skill:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+#skillss.visible .skills-container:nth-child(2) .skill:nth-child(3) {
+  animation-delay: 0.15s;
+}
+
+#skillss.visible .skills-container:nth-child(2) .skill:nth-child(4) {
+  animation-delay: 0.2s;
+}
+
+#skillss.visible .skills-container:nth-child(2) .skill:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+#skillss.visible .skills-container:nth-child(2) .skill:nth-child(6) {
+  animation-delay: 0.3s;
+}
+
+#skillss.visible .skills-container:nth-child(2) .skill:nth-child(7) {
+  animation-delay: 0.35s;
+}
+
+#skillss.visible .skills-container:nth-child(4) .skill:nth-child(1) {
+  animation-delay: 0.4s;
+}
+
+#skillss.visible .skills-container:nth-child(4) .skill:nth-child(2) {
+  animation-delay: 0.45s;
+}
+
+#skillss.visible .skills-container:nth-child(4) .skill:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+#skillss.visible .skills-container:nth-child(4) .skill:nth-child(4) {
+  animation-delay: 0.55s;
+}
+
+#skillss.visible .skills-container:nth-child(6) .skill:nth-child(1) {
+  animation-delay: 0.6s;
+}
+
+#skillss.visible .skills-container:nth-child(6) .skill:nth-child(2) {
+  animation-delay: 0.65s;
+}
+
+#skillss.visible .skills-container:nth-child(6) .skill:nth-child(3) {
+  animation-delay: 0.7s;
+}
+
+/* ========================================
+   RESPONSIVE — Tablet (max-width: 768px)
+   ======================================== */
 @media (max-width: 768px) {
+
+  /* Header & Nav */
+  header {
+    justify-content: space-between;
+    padding: 12px 20px;
+  }
+
+  .hamburger {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 12px;
+  }
+
+  nav {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    background-color: #001030;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  nav.active {
+    display: flex;
+  }
+
+  nav a {
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    font-size: 1.1rem;
+  }
+
+  nav a::after {
+    display: none;
+  }
+
+  /* Hero */
+  #inicio {
+    background-attachment: scroll;
+    padding: 80px 20px 40px;
+  }
+
+  .section-container-inicio {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  #inicio h1 {
+    font-size: 2em;
+  }
+
+  #inicio p {
+    font-size: 1.2em;
+  }
+
+  .img-perfil {
+    width: 150px;
+    height: 150px;
+  }
+
+  /* Sections */
+  section {
+    padding: 80px 20px 40px;
+  }
+
+  .Caja1 {
+    padding: 18px;
+  }
+
+  /* Projects */
+  .contenedor-proyectos {
+    flex-direction: column;
+  }
+
+  .carousel-section {
+    max-width: 100% !important;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .content-section {
+    max-width: 100% !important;
+    padding: 15px;
+  }
+
+  .content-section h1 {
+    font-size: 1.4rem;
+  }
+
   .container {
     flex-direction: column;
     text-align: center;
@@ -560,73 +768,112 @@ p {
   .content-section {
     max-width: 100%;
   }
-}
 
-.carousel-section {
-  flex: 1;
-  max-width: 600px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.carousel-images {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-}
-
-.carousel-images img {
-  width: 100%;
-  flex-shrink: 0;
-}
-
-.carousel-controls {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  transform: translateY(-50%);
-}
-
-.carousel-controls button {
-  background-color: rgba(0, 0, 0, 0.5);
-  border: none;
-  color: white;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 50%;
-}
-
-.carousel-controls button:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-
-
-
-
-  #sobre-mi {
-    background-color: #002b5c;
+  .div-iconos-link {
+    flex-direction: column;
+    align-items: center;
   }
-  
-  #proyectos {
-    background-color: #004080;
+
+  .button-link {
+    margin-left: 0;
+    margin-top: 10px;
+    justify-content: center;
   }
-  
-  #skills {
-    background-color: #003f5c;
+
+  .tech-icons {
+    justify-content: center;
   }
-  
-  #contacto {
-    background-color: #002147;
+
+  .tech-icons img {
+    width: 30px;
+    height: 30px;
   }
-  
-  footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #001030;
-    color: #fff;
-    position: relative;
+
+  /* Skills */
+  .skills-container {
+    gap: 15px;
   }
+
+  .skill {
+    width: 80px;
+  }
+
+  .skill-icon {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* ========================================
+   RESPONSIVE — Mobile (max-width: 480px)
+   ======================================== */
+@media (max-width: 480px) {
+  #inicio h1 {
+    font-size: 1.5em;
+  }
+
+  #inicio p {
+    font-size: 1em;
+  }
+
+  .img-perfil {
+    width: 120px;
+    height: 120px;
+  }
+
+  .button-cv {
+    font-size: 15px !important;
+    padding: 10px 20px;
+  }
+
+  section {
+    padding: 70px 15px 30px;
+  }
+
+  .Caja1 {
+    padding: 15px;
+  }
+
+  .Caja1 h2 {
+    font-size: 1.1rem;
+  }
+
+  .Caja1 p {
+    font-size: 0.9rem;
+  }
+
+  .content-section h1 {
+    font-size: 1.2rem;
+  }
+
+  .content-section p {
+    font-size: 0.9rem;
+  }
+
+  .skill {
+    width: 70px;
+  }
+
+  .skill-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .skill p,
+  .skill h2 {
+    font-size: 0.8em;
+  }
+
+  .carousel-controls button {
+    padding: 8px 12px;
+    font-size: 1rem;
+  }
+
+  .section-container h2 {
+    font-size: 1.3rem;
+  }
+
+  .section-container p {
+    font-size: 0.95rem;
+  }
+}

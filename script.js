@@ -1,62 +1,85 @@
-/*CARRUSEL 1 */
-const images1 = document.querySelectorAll('.carousel-section')[0].querySelector('.carousel-images');
-const prevButton1 = document.getElementById('prev');
-const nextButton1 = document.getElementById('next');
-const totalImages1 = images1.querySelectorAll('img').length;
-let currentIndex1 = 0;
+/* ========================================
+   HAMBURGER MENU TOGGLE
+   ======================================== */
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const mainNav = document.getElementById('main-nav');
 
-function updateCarousel1() {
-  images1.style.transform = `translateX(-${currentIndex1 * 100}%)`;
+hamburgerBtn.addEventListener('click', () => {
+  mainNav.classList.toggle('active');
+  // Toggle between ☰ and ✕
+  hamburgerBtn.innerHTML = mainNav.classList.contains('active') ? '&times;' : '&#9776;';
+});
+
+// Close menu when clicking a link
+mainNav.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mainNav.classList.remove('active');
+    hamburgerBtn.innerHTML = '&#9776;';
+  });
+});
+
+/* ========================================
+   CAROUSELS
+   ======================================== */
+function initCarousel(sectionIndex, prevId, nextId) {
+  const carouselSection = document.querySelectorAll('.carousel-section')[sectionIndex];
+  if (!carouselSection) return;
+
+  const imagesContainer = carouselSection.querySelector('.carousel-images');
+  const prevButton = document.getElementById(prevId);
+  const nextButton = document.getElementById(nextId);
+  const totalImages = imagesContainer.querySelectorAll('img').length;
+  let currentIndex = 0;
+
+  function update() {
+    imagesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+  }
+
+  prevButton.addEventListener('click', () => {
+    currentIndex = (currentIndex > 0) ? currentIndex - 1 : totalImages - 1;
+    update();
+  });
+
+  nextButton.addEventListener('click', () => {
+    currentIndex = (currentIndex < totalImages - 1) ? currentIndex + 1 : 0;
+    update();
+  });
+
+  // Auto-play every 5 seconds
+  setInterval(() => {
+    currentIndex = (currentIndex < totalImages - 1) ? currentIndex + 1 : 0;
+    update();
+  }, 5000);
 }
 
-prevButton1.addEventListener('click', () => {
-  currentIndex1 = (currentIndex1 > 0) ? currentIndex1 - 1 : totalImages1 - 1;
-  updateCarousel1();
+initCarousel(0, 'prev', 'next');
+initCarousel(1, 'prev1', 'next1');
+initCarousel(2, 'prev2', 'next2');
+
+/* ========================================
+   SCROLL ANIMATIONS — IntersectionObserver
+   ======================================== */
+const sections = document.querySelectorAll('section');
+
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+
+      // Animate children with .animate-item class
+      const animItems = entry.target.querySelectorAll('.animate-item');
+      animItems.forEach((item, index) => {
+        setTimeout(() => {
+          item.classList.add('show');
+        }, index * 120);
+      });
+    }
+  });
+}, {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
 });
 
-nextButton1.addEventListener('click', () => {
-  currentIndex1 = (currentIndex1 < totalImages1 - 1) ? currentIndex1 + 1 : 0;
-  updateCarousel1();
-});
-
-/*CARRUSEL 2 */
-const images2 = document.querySelectorAll('.carousel-section')[1].querySelector('.carousel-images');
-const prevButton2 = document.getElementById('prev1');
-const nextButton2 = document.getElementById('next1');
-const totalImages2 = images2.querySelectorAll('img').length;
-let currentIndex2 = 0;
-
-function updateCarousel2() {
-  images2.style.transform = `translateX(-${currentIndex2 * 100}%)`;
-}
-
-prevButton2.addEventListener('click', () => {
-  currentIndex2 = (currentIndex2 > 0) ? currentIndex2 - 1 : totalImages2 - 1;
-  updateCarousel2();
-});
-
-nextButton2.addEventListener('click', () => {
-  currentIndex2 = (currentIndex2 < totalImages2 - 1) ? currentIndex2 + 1 : 0;
-  updateCarousel2();
-});
-
-/* CARRUSEL 3 */
-const images3 = document.querySelectorAll('.carousel-section')[2].querySelector('.carousel-images');
-const prevButton3 = document.getElementById('prev2');
-const nextButton3 = document.getElementById('next2');
-const totalImages3 = images3.querySelectorAll('img').length;
-let currentIndex3 = 0;
-
-function updateCarousel3() {
-  images3.style.transform = `translateX(-${currentIndex3 * 100}%)`;
-}
-
-prevButton3.addEventListener('click', () => {
-  currentIndex3 = (currentIndex3 > 0) ? currentIndex3 - 1 : totalImages3 - 1;
-  updateCarousel3();
-});
-
-nextButton3.addEventListener('click', () => {
-  currentIndex3 = (currentIndex3 < totalImages3 - 1) ? currentIndex3 + 1 : 0;
-  updateCarousel3();
+sections.forEach(section => {
+  sectionObserver.observe(section);
 });
